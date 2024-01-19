@@ -20,14 +20,14 @@ def _split_sets_for_run(df):
     x_train = tf.ragged.constant([v[..., None] for v in train_set["input"].values])
     x_test = tf.ragged.constant([v[..., None] for v in test_set["input"].values])
     print(x_train.bounding_shape())
-    # print(x_train[0].shape)
-    # print(x_train[1].shape)
-    # print(x_train[2].shape)
 
     y_train = tf.ragged.constant([v[..., None] for v in train_set["output"].values])
-    y_test = tf.ragged.constant([v[..., None] for v in test_set["output"].values])
+    tmp = [v for v in test_set["output"].values]
+    y_test = np.array(tmp)
+
     print(y_train)
     print(y_train.shape)
+    print(y_test)
 
     return x_train, y_train, x_test, y_test
 
@@ -56,5 +56,4 @@ def _train(model, x_train, y_train):
 
 def _predict(model, x_test):
     prediction = model.predict(x_test)
-    # print(prediction)
     return prediction

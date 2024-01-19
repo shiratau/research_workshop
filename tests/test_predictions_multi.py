@@ -1,8 +1,5 @@
 import ast
 
-import numpy as np
-import pandas as pd
-
 from lib import *
 from multi import predict_multi_sd
 
@@ -11,7 +8,7 @@ UP_LIMIT = (100 + DEVIATION_PERCENTAGE) / 100
 DOWN_LIMIT = (100 - DEVIATION_PERCENTAGE) / 100
 
 
-def test_predict_number_from_seq():
+def test_predict_multi_numbers_from_seq():
     df = pd.DataFrame(
         {
             "input": pd.Series([
@@ -32,11 +29,11 @@ def test_predict_number_from_seq():
     print(predictions)
     print(y_test)
 
-    # for i in range(len(predictions)):
-    #     prd = predictions.flat[i]
-    #     exp = y_test.flat[i]
-    #     cmp = _compare_result_in_allowed_range(prd, exp)
-    #     print(f'prediction: {prd}, expected: {exp}, comparison: {cmp}')
+    for i in range(len(predictions.flat)):
+        prd = predictions.flat[i]
+        exp = y_test.flat[i]
+        cmp = _compare_result_in_allowed_range(prd, exp)
+        print(f'prediction: {prd}, expected: {exp}, comparison: {cmp}')
 
 
 def test_predict_sd_normal():
