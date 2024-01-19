@@ -22,8 +22,7 @@ def _split_sets_for_run(df):
     print(x_train.bounding_shape())
 
     y_train = tf.ragged.constant([v[..., None] for v in train_set["output"].values])
-    tmp = [v for v in test_set["output"].values]
-    y_test = np.array(tmp)
+    y_test = np.array([v for v in test_set["output"].values])
 
     print(y_train)
     print(y_train.shape)
