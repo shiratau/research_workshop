@@ -1,3 +1,6 @@
+graphviz==0.20.1 # on windows add to PATH is also required.
+# https://github.com/keras-team/keras/issues/19040#issuecomment-1902097713
+# https://github.com/tensorflow/tensorflow/issues/62760
 keras==2.14.0
 numpy==1.23.5
 matplotlib==3.7.1
@@ -8,6 +11,7 @@ pandas-datareader==0.10.0
 #pandas-gbq==0.17.9
 pandas-stubs==1.5.3.230304
 Pillow==10.1.0
+pydot==2.0.0
 pytest==7.4.3
 tensorflow==2.14.0
 tensorflow-datasets==4.9.3

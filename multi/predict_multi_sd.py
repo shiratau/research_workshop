@@ -40,6 +40,8 @@ def _build_model():
     model.compile(loss="mse", optimizer="adam")
     model.summary()
 
+    _shape_visualization(model)
+
     return model
 
 
@@ -56,3 +58,7 @@ def _train(model, x_train, y_train):
 def _predict(model, x_test):
     prediction = model.predict(x_test)
     return prediction
+
+
+def _shape_visualization(model):
+    tf.keras.utils.plot_model(model, to_file='model_shape.png', show_shapes=True)
