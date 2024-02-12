@@ -51,7 +51,7 @@ def _train(model, x_train, y_train):
     print(his.keys())
     plt.plot(his["loss"], label="loss")
     plt.legend(loc="upper right")
-    plt.savefig('loss.png', bbox_inches='tight')
+    plt.savefig('loss_single.png', bbox_inches='tight')
 
 
 def _predict(model, x_test):
