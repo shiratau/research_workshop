@@ -27,7 +27,7 @@ def test_predict_number_from_seq():
 
 
 def test_predict_sd_normal():
-    raw_df = pd.read_csv("history/single_dataset7.csv")
+    raw_df = pd.read_csv("single_dataset.csv")
     print(raw_df.head())
     samples_input = [np.array(ast.literal_eval(sample), dtype=float) for sample in raw_df["sample"]]
     sd_output = [_ for _ in raw_df["sd"]]
