@@ -2,13 +2,13 @@ from random import randrange, uniform, randint
 
 from lib import *
 
-FILE_ID = 'multi_dataset7'
-NUMBER_OF_AGENTS = 10
+FILE_ID = 'multi_dataset77'
+NUMBER_OF_AGENTS = 4
 NUMBER_OF_DIST_PER_AGENT = 3
-MAX_SAMPLES_PER_AGENT = 15
-MIN_SAMPLES_PER_AGENT = 10
-MAX_SIZE_OF_SAMPLE = 18
-MIN_SIZE_OF_SAMPLE = 15
+MAX_SAMPLES_PER_AGENT = 4
+MIN_SAMPLES_PER_AGENT = 3
+MAX_SIZE_OF_SAMPLE = 8
+MIN_SIZE_OF_SAMPLE = 5
 MU_RANGE = (0.1, 0.8)
 SIGMA_RANGE = (0.01, 0.1)
 SHOULD_ROUND = True
@@ -21,13 +21,16 @@ def run_script():
     for agent_id in range(NUMBER_OF_AGENTS):
         sd_pool = _generate_sds(NUMBER_OF_DIST_PER_AGENT)
         mu_pool = _generate_mus(NUMBER_OF_DIST_PER_AGENT)
-        num_of_samples = randrange(MIN_SAMPLES_PER_AGENT, MAX_SAMPLES_PER_AGENT)
-        parts = _split_total_samples_num_to_samples_groups(num_of_samples)
-        for dist_size in parts:
-            for sample_id in range(dist_size):
+        # num_of_samples = randrange(MIN_SAMPLES_PER_AGENT, MAX_SAMPLES_PER_AGENT)
+        # parts = _split_total_samples_num_to_samples_groups(num_of_samples)
+        parts = [1, 1, 1]
+        for i in range(3):
+            for sample_id in range(1):
                 sample_size = randrange(MIN_SIZE_OF_SAMPLE, MAX_SIZE_OF_SAMPLE)
-                curr_mu = mu_pool[parts.index(dist_size)]
-                curr_sd = sd_pool[parts.index(dist_size)]
+                # curr_mu = mu_pool[parts.index(dist_size)]
+                # curr_sd = sd_pool[parts.index(dist_size)]
+                curr_mu = mu_pool[i]
+                curr_sd = sd_pool[i]
                 curr_sample = _pos_normal(curr_mu, curr_sd, sample_size)
                 row = [agent_id, sample_id, sample_size, curr_sample, curr_mu, curr_sd]
                 df.loc[len(df.index)] = row
