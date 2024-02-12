@@ -2,13 +2,13 @@ from random import randrange, uniform, randint
 
 from lib import *
 
-FILE_ID = 'multi_dataset77'
-NUMBER_OF_AGENTS = 4
+FILE_ID = 'multi_dataset771'
+NUMBER_OF_AGENTS = 50
 NUMBER_OF_DIST_PER_AGENT = 3
-MAX_SAMPLES_PER_AGENT = 4
-MIN_SAMPLES_PER_AGENT = 3
-MAX_SIZE_OF_SAMPLE = 8
-MIN_SIZE_OF_SAMPLE = 5
+# MAX_SAMPLES_PER_AGENT = 4
+# MIN_SAMPLES_PER_AGENT = 3
+MAX_SIZE_OF_SAMPLE = 210
+MIN_SIZE_OF_SAMPLE = 190
 MU_RANGE = (0.1, 0.8)
 SIGMA_RANGE = (0.01, 0.1)
 SHOULD_ROUND = True
@@ -34,16 +34,26 @@ def run_script():
                 curr_sample = _pos_normal(curr_mu, curr_sd, sample_size)
                 row = [agent_id, sample_id, sample_size, curr_sample, curr_mu, curr_sd]
                 df.loc[len(df.index)] = row
+        print(f"done Agent {agent_id}")
 
     df.to_csv(f'{FILE_ID}.csv')
     _write_metadata()
+
+#
+# def _pos_normal(mu, sd, sample_size):
+#     # make sure all numbers are in (0.02, 2.0) range, and not negative.
+#     sample = np.random.normal(mu, sd, sample_size)
+#     while not all(0.02 < x < 2.0 for x in sample):
+#         sample = np.random.normal(mu, sd, sample_size)
+#     return [_round_if_configured(x) for x in sample]
 
 
 def _pos_normal(mu, sd, sample_size):
     # make sure all numbers are in (0.02, 2.0) range, and not negative.
     sample = np.random.normal(mu, sd, sample_size)
-    while not all(0.02 < x < 2.0 for x in sample):
-        sample = np.random.normal(mu, sd, sample_size)
+    for _ in range(10):
+        if not all(0.02 < x < 2.0 for x in sample):
+            sample = np.random.normal(mu, sd, sample_size)
     return [_round_if_configured(x) for x in sample]
 
 
@@ -92,8 +102,8 @@ def _write_metadata():
         f'FILE_ID: {FILE_ID}',
         f'NUMBER_OF_AGENTS: {NUMBER_OF_AGENTS}',
         f'NUMBER_OF_DIST_PER_AGENT: {NUMBER_OF_DIST_PER_AGENT}',
-        f'MAX_SAMPLES_PER_AGENT: {MAX_SAMPLES_PER_AGENT}',
-        f'MIN_SAMPLES_PER_AGENT: {MIN_SAMPLES_PER_AGENT}',
+        # f'MAX_SAMPLES_PER_AGENT: {MAX_SAMPLES_PER_AGENT}',
+        # f'MIN_SAMPLES_PER_AGENT: {MIN_SAMPLES_PER_AGENT}',
         f'MAX_SIZE_OF_SAMPLE: {MAX_SIZE_OF_SAMPLE}',
         f'MIN_SIZE_OF_SAMPLE: {MIN_SIZE_OF_SAMPLE}',
         f'MU_RANGE: {MU_RANGE}',

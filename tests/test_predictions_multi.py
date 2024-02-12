@@ -65,7 +65,7 @@ def test_predict_multi_dataset77():
 
 
 def test_predict_sd_normal():
-    raw_df = pd.read_csv("multi_dataset77.csv")
+    raw_df = pd.read_csv("multi_dataset771.csv")
     print(raw_df.head())
     samples_input, sd_output = _get_data_from_df(raw_df)
     df = pd.DataFrame(
@@ -96,7 +96,7 @@ def test_predict_sd_normal():
 
 
 def _get_data_from_df(raw_df):
-    num_of_agents = 4  # todo: read from dataset metadata
+    num_of_agents = 50  # todo: read from dataset metadata
     samples_input = []
     sd_output = []
 
