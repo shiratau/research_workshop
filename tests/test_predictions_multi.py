@@ -36,8 +36,37 @@ def test_predict_multi_numbers_from_seq():
         print(f'prediction: {prd}, expected: {exp}, comparison: {cmp}')
 
 
+def test_predict_multi_dataset77():
+    df = pd.DataFrame(
+        {
+            "input": pd.Series([
+                np.array([0.486, 0.677, 0.453, 0.547, 0.527, 0.408, 0.505, 0.745, 0.78, 0.636, 0.647, 0.819, 0.351, 0.381, 0.383, 0.309, 0.333]),
+                np.array([0.336, 0.319, 0.342, 0.277, 0.332, 0.337, 0.286, 0.305, 0.21, 0.232, 0.216, 0.247, 0.206, 0.271, 0.233, 0.31, 0.263, 0.292, 0.279, 0.233]),
+                np.array([0.648, 0.642, 0.481, 0.755, 0.52, 0.685, 0.618, 0.713, 0.47, 0.56, 0.57, 0.8, 0.725, 0.711, 0.099, 0.095, 0.114, 0.088, 0.085, 0.128, 0.16]),
+                np.array([0.209, 0.203, 0.243, 0.228, 0.286, 0.318, 0.24, 0.24, 0.261, 0.259, 0.255, 0.278, 0.726, 0.718, 0.749, 0.72, 0.682, 0.688])
+            ]),
+            "output": pd.Series([
+                np.array([0.085, 0.089, 0.021]),
+                np.array([0.024, 0.041, 0.02]),
+                np.array([0.093, 0.091, 0.048]),
+                np.array([0.047, 0.021, 0.023])
+            ])
+        }
+    )
+    predictions, y_test = predict_multi_sd.run(df)
+    print(predictions)
+    print(y_test)
+
+    for i in range(len(predictions.flat)):
+        prd = predictions.flat[i]
+        exp = y_test.flat[i]
+        cmp = _compare_result_in_allowed_range(prd, exp)
+        print(f'prediction: {prd}, expected: {exp}, comparison: {cmp}')
+
+
 def test_predict_sd_normal():
-    raw_df = pd.read_csv("multi_dataset7.csv")
+    file_id = "multi_dataset7"
+    raw_df = pd.read_csv(f'./../multi/datasets/{file_id}.csv')
     print(raw_df.head())
     samples_input, sd_output = _get_data_from_df(raw_df)
     df = pd.DataFrame(

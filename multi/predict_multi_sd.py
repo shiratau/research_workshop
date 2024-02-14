@@ -5,7 +5,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 def run(df):
     x_train, y_train, x_test, y_test = _split_sets_for_run(df)
-    model = _build_model()
+    # model = _build_model()
+    model = _build_model_v2()
     _train(model, x_train, y_train)
     predictions = _predict(model, x_test)
     return predictions, y_test
@@ -38,6 +39,22 @@ def _build_model():
     model.add(tf.keras.layers.LSTM(units=32))
     model.add(tf.keras.layers.Dense(units=3))
     model.compile(loss="mse", optimizer="adam")
+    model.summary()
+
+    _shape_visualization(model)
+
+    return model
+
+
+def _build_model_v2():
+    model = tf.keras.Sequential([
+        tf.keras.layers.LSTM(64, return_sequences=True, input_shape=(None, 1)),
+        tf.keras.layers.LSTM(32, return_sequences=False),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(3, activation='linear')  # Output layer for predicting 3 sigma values
+    ])
+    model.compile(loss="mse", optimizer="adam")
+    # model.compile(optimizer="adam", loss="mse", metrics=["mae"])
     model.summary()
 
     _shape_visualization(model)
