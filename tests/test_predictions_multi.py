@@ -97,7 +97,8 @@ def test_predict_sd_normal():
 
 
 def _get_data_from_df(raw_df):
-    num_of_agents = 10  # todo: read from dataset metadata
+    num_of_agents = max(raw_df['Agent']) + 1
+    print(f'number of agents: {num_of_agents}')
     samples_input = []
     sd_output = []
 
