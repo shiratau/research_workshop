@@ -3,7 +3,7 @@ import ast
 from lib import *
 from multi import predict_multi_sd
 
-DEVIATION_PERCENTAGE = 30
+DEVIATION_PERCENTAGE = 20
 UP_LIMIT = (100 + DEVIATION_PERCENTAGE) / 100
 DOWN_LIMIT = (100 - DEVIATION_PERCENTAGE) / 100
 
@@ -80,6 +80,8 @@ def test_predict_sd_normal():
     print(predictions)
     print(y_test)
 
+    df = pd.DataFrame(columns=['expected', 'prediction', 'compare'])
+
     suc = 0
     for i in range(len(predictions)):
         sd_prd_set = predictions[i]
@@ -92,8 +94,11 @@ def test_predict_sd_normal():
             if cmp:
                 suc += 1
 
+            df.loc[len(df.index)] = [exp, prd, cmp]
+
     print(f"num of success: {suc}")
     print(f"num of fails: {len(predictions)*3 - suc}")
+    _export_result(df, file_id)
 
 
 def _get_data_from_df(raw_df):
@@ -125,3 +130,12 @@ def _get_data_from_df(raw_df):
 
 def _compare_result_in_allowed_range(prediction, y_test_value) -> bool:
     return y_test_value * DOWN_LIMIT <= prediction <= y_test_value * UP_LIMIT
+
+
+def _export_result(df, file_id):
+    path = "./results/{}.csv"
+
+    if not os.path.exists(path.format(file_id)):
+        df.to_csv(path.format(file_id))
+    else:
+        df.to_csv(path.format(f'{file_id}_new'))

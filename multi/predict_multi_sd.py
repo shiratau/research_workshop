@@ -41,7 +41,7 @@ def _build_model():
     model.compile(loss="mse", optimizer="adam")
     model.summary()
 
-    _shape_visualization(model)
+    # _shape_visualization(model)
 
     return model
 
@@ -57,7 +57,7 @@ def _build_model_v2():
     # model.compile(optimizer="adam", loss="mse", metrics=["mae"])
     model.summary()
 
-    _shape_visualization(model)
+    # _shape_visualization(model)
 
     return model
 

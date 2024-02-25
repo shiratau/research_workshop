@@ -99,6 +99,8 @@ def _write_metadata():
         f'MIN_SIZE_OF_SAMPLE: {MIN_SIZE_OF_SAMPLE}',
         f'MU_RANGE: {MU_RANGE}',
         f'SIGMA_RANGE: {SIGMA_RANGE}',
+        f'SHOULD_ROUND: {SHOULD_ROUND}',
+        f'N_DIGIT: {N_DIGIT}',
     ]
     with open(f'./datasets/metadata/{FILE_ID}.txt', 'w') as f:
         for line in metadata:
