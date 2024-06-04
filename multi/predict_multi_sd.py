@@ -62,6 +62,24 @@ def _build_model_v2():
     return model
 
 
+def _build_model_v3():
+    bins = _bins(0.01, 0.03, 20)
+    model = tf.keras.Sequential([
+        tf.keras.layers.LSTM(64, return_sequences=True, input_shape=(None, 1)),
+        tf.keras.layers.LSTM(32, return_sequences=False),
+        tf.keras.layers.Dense(32, activation='relu'),
+        tf.keras.layers.Dense(3, activation='linear'),  # Output layer for predicting 3 sigma values
+        tf.keras.layers.Discretization(bin_boundaries=bins, epsilon=0.01)
+    ])
+    model.compile(loss="mse", optimizer="adam")
+    # model.compile(optimizer="adam", loss="mse", metrics=["mae"])
+    model.summary()
+
+    # _shape_visualization(model)
+
+    return model
+
+
 def _train(model, x_train, y_train):
     history = model.fit(x=x_train, y=y_train, epochs=30)
 
@@ -79,3 +97,8 @@ def _predict(model, x_test):
 
 def _shape_visualization(model):
     tf.keras.utils.plot_model(model, to_file='model_shape.png', show_shapes=True)
+
+
+def _bins(start, end, num_bins):
+    gap = (end - start) / num_bins
+    return [math.ceil(n * gap + start) for n in range(num_bins + 1)]

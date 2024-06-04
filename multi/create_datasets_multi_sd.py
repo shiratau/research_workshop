@@ -2,16 +2,16 @@ from random import randrange, uniform, randint
 
 from lib import *
 
-FILE_ID = 'multi_dataset1'
+FILE_ID = 'multi_dataset10001'
 FILE_PATH_TEMPLATE = "./datasets/{}.csv"
-NUMBER_OF_AGENTS = 50
+NUMBER_OF_AGENTS = 100
 NUMBER_OF_DIST_PER_AGENT = 3
 MAX_SIZE_OF_SAMPLE = 210
 MIN_SIZE_OF_SAMPLE = 190
 MU_RANGE = (0.1, 0.8)
-SIGMA_RANGE = (0.01, 0.1)
+SIGMA_RANGE = (0.01, 0.5)
 SHOULD_ROUND = True
-N_DIGIT = 3
+N_DIGIT = 5
 
 
 def run_script():
