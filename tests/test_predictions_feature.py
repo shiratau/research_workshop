@@ -1,7 +1,7 @@
 import ast
 
 from lib import *
-from feature import predict_multi_featured_sd_new
+from feature import predict_multi_featured_sd
 
 DEVIATION_PERCENTAGE = 20
 UP_LIMIT = (100 + DEVIATION_PERCENTAGE) / 100
@@ -31,7 +31,7 @@ def test_predict_multi_numbers_from_seq():
             ])
         }
     )
-    predictions, y_test = predict_multi_featured_sd_new.run(df)
+    predictions, y_test = predict_multi_featured_sd.run(df)
     print(predictions)
     print(y_test)
 
@@ -65,7 +65,7 @@ def test_feature():
     #     }
     # )
 
-    predictions, y_test = predict_multi_featured_sd_new.run(df)
+    predictions, y_test = predict_multi_featured_sd.run(df)
 
     print(predictions)
     print(y_test)
