@@ -38,21 +38,17 @@ def _split_sets_for_run(df):
 
 def _build_model():
     model = CombinedLSTMModel()
-    initial_learning_rate = 0.01
     lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
-        initial_learning_rate=initial_learning_rate,
+        initial_learning_rate=0.01,
         decay_steps=1000,
         decay_rate=0.9,
         staircase=True)
-
-    # Compile the model with Adam optimizer and the learning rate schedule
     optimizer = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
-    # optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
     model.compile(optimizer=optimizer, loss='mae')
     model.build(input_shape=[(None, None, 1), (None, None, 1)])  # Specify the input shape
     model.summary()
 
-    _shape_visualization(model)
+    # _shape_visualization(model) # doesn't work here
 
     return model
 
@@ -74,7 +70,6 @@ def _predict(model, test_dataset):
 
 def _shape_visualization(model):
     tf.keras.utils.plot_model(model, to_file='model_shape.png', show_shapes=True)
-    # tf.keras.utils.plot_model(model, to_file='model_shape.png', show_shapes=True, show_layer_names=True)
 
 
 class CombinedLSTMModel(tf.keras.Model):
@@ -83,7 +78,9 @@ class CombinedLSTMModel(tf.keras.Model):
         self.lstm1 = tf.keras.layers.LSTM(64, return_sequences=True)
         self.lstm2 = tf.keras.layers.LSTM(32, return_sequences=False)
         self.dense1 = tf.keras.layers.Dense(32, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.01))
-        # self.discretization = tf.keras.layers.Discretization(num_bins=10, epsilon=0.01)  # https://www.tensorflow.org/api_docs/python/tf/keras/layers/Discretization
+        # Adding binning layer didn't give better results. You can try it by uncomment the line below.
+        # self.discretization = tf.keras.layers.Discretization(num_bins=10, epsilon=0.01)
+        # https://www.tensorflow.org/api_docs/python/tf/keras/layers/Discretization
         self.dense2 = tf.keras.layers.Dense(3, activation='linear')
 
     def call(self, inputs):
@@ -100,3 +97,4 @@ def _process_element(samples, timestamps, labels):
     samples = tf.expand_dims(samples, axis=-1)
     timestamps = tf.expand_dims(timestamps, axis=-1)
     return (samples, timestamps), labels
+
