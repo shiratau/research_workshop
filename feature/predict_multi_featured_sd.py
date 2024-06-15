@@ -28,8 +28,8 @@ def _split_sets_for_run(df):
     train_dataset = tf.data.Dataset.from_tensor_slices((train_features_samples, train_features_timestamps, train_y)).batch(2)
     test_dataset = tf.data.Dataset.from_tensor_slices((test_features_samples, test_features_timestamps, test_y)).batch(2)
 
-    train_dataset = train_dataset.map(process_element)
-    test_dataset = test_dataset.map(process_element)
+    train_dataset = train_dataset.map(_process_element)
+    test_dataset = test_dataset.map(_process_element)
 
     test_y = np.array([v for v in test_set["output"].values])
 
@@ -64,6 +64,7 @@ def _predict(model, test_dataset):
 
 def _shape_visualization(model):
     tf.keras.utils.plot_model(model, to_file='model_shape.png', show_shapes=True)
+    # tf.keras.utils.plot_model(model, to_file='model_shape.png', show_shapes=True, show_layer_names=True)
 
 
 class CombinedLSTMModel(tf.keras.Model):
@@ -83,7 +84,7 @@ class CombinedLSTMModel(tf.keras.Model):
         return self.dense2(x)
 
 
-def process_element(samples, timestamps, labels):
+def _process_element(samples, timestamps, labels):
     # Expand dimensions to match LSTM input requirements
     samples = tf.expand_dims(samples, axis=-1)
     timestamps = tf.expand_dims(timestamps, axis=-1)

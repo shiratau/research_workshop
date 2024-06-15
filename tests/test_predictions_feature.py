@@ -43,7 +43,7 @@ def test_predict_multi_numbers_from_seq():
 
 
 def test_feature():
-    file_id = "feature_dataset2"
+    file_id = "feature_dataset"
     raw_df = pd.read_csv(f'./../feature/datasets/{file_id}.csv')
     samples_input, timestamps_input, sd_output = _get_data_from_df(raw_df)
     df = pd.DataFrame(
@@ -53,17 +53,6 @@ def test_feature():
             "output": pd.Series(sd_output)
         }
     )
-
-    # features = tf.ragged.constant(timestamps_input, dtype=tf.float64)
-    # labels = tf.ragged.constant(samples_input, dtype=tf.float64)
-    # dataset = tf.data.Dataset.from_tensor_slices((features, labels))
-    #
-    # df = pd.DataFrame(
-    #     {
-    #         "input": dataset,
-    #         "output": pd.Series(sd_output)
-    #     }
-    # )
 
     predictions, y_test = predict_multi_featured_sd.run(df)
 
@@ -89,7 +78,6 @@ def test_feature():
     print(f"num of success: {suc}")
     print(f"num of fails: {len(predictions)*3 - suc}")
     _export_result(df, file_id)
-    print(raw_df.head())
 
 
 def _get_data_from_df(raw_df):
