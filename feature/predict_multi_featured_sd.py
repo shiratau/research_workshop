@@ -38,7 +38,17 @@ def _split_sets_for_run(df):
 
 def _build_model():
     model = CombinedLSTMModel()
-    model.compile(optimizer='adam', loss='mse')
+    initial_learning_rate = 0.01
+    lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
+        initial_learning_rate=initial_learning_rate,
+        decay_steps=1000,
+        decay_rate=0.9,
+        staircase=True)
+
+    # Compile the model with Adam optimizer and the learning rate schedule
+    optimizer = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
+    # optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
+    model.compile(optimizer=optimizer, loss='mae')
     model.build(input_shape=[(None, None, 1), (None, None, 1)])  # Specify the input shape
     model.summary()
 
@@ -48,7 +58,7 @@ def _build_model():
 
 
 def _train(model, train_dataset, test_dataset):
-    history = model.fit(train_dataset, epochs=10, validation_data=test_dataset)
+    history = model.fit(train_dataset, epochs=20, validation_data=test_dataset)
 
     his = history.history
     print(his.keys())
@@ -72,7 +82,7 @@ class CombinedLSTMModel(tf.keras.Model):
         super(CombinedLSTMModel, self).__init__()
         self.lstm1 = tf.keras.layers.LSTM(64, return_sequences=True)
         self.lstm2 = tf.keras.layers.LSTM(32, return_sequences=False)
-        self.dense1 = tf.keras.layers.Dense(32, activation='relu')
+        self.dense1 = tf.keras.layers.Dense(32, activation='relu', kernel_regularizer=tf.keras.regularizers.l2(0.01))
         # self.discretization = tf.keras.layers.Discretization(num_bins=10, epsilon=0.01)  # https://www.tensorflow.org/api_docs/python/tf/keras/layers/Discretization
         self.dense2 = tf.keras.layers.Dense(3, activation='linear')
 

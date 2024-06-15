@@ -43,7 +43,7 @@ def test_predict_multi_numbers_from_seq():
 
 
 def test_feature():
-    file_id = "feature_dataset4"
+    file_id = "feature_dataset5"
     raw_df = pd.read_csv(f'./../feature/datasets/{file_id}.csv')
     samples_input, timestamps_input, sd_output = _get_data_from_df(raw_df)
     df = pd.DataFrame(
@@ -120,7 +120,7 @@ def _compare_result_in_allowed_range(prediction, y_test_value) -> bool:
 
 
 def _export_result(df, file_id):
-    path = "./results/feature/result_{}.csv"
+    path = "./results/feature/result2_{}.csv"
 
     if not os.path.exists(path.format(file_id)):
         df.to_csv(path.format(file_id))

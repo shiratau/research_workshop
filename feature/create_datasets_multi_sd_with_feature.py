@@ -3,14 +3,14 @@ from random import randrange, uniform, randint
 
 from lib import *
 
-FILE_ID = 'feature_dataset4'
+FILE_ID = 'feature_dataset5'
 FILE_PATH_TEMPLATE = "./datasets/{}.csv"
 NUMBER_OF_AGENTS = 100
 NUMBER_OF_DIST_PER_AGENT = 3
 MAX_SIZE_OF_SAMPLE = 210
 MIN_SIZE_OF_SAMPLE = 190
-MU_RANGE = (0.1, 0.8)
-SIGMA_RANGE = (0.01, 0.5)
+MU_RANGE = (20.1, 20.8)
+SIGMA_RANGE = (0.01, 0.1)
 SHOULD_ROUND = True
 N_DIGIT = 5
 

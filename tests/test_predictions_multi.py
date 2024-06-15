@@ -65,9 +65,9 @@ def test_predict_multi_dataset77():
 
 
 def test_predict_sd_normal():
-    file_id = "feature_dataset4"
-    # raw_df = pd.read_csv(f'./../multi/datasets/{file_id}.csv')
-    raw_df = pd.read_csv(f'./../feature/datasets/{file_id}.csv')
+    file_id = "multi_dataset1005"
+    raw_df = pd.read_csv(f'./../multi/datasets/{file_id}.csv')
+    # raw_df = pd.read_csv(f'./../feature/datasets/{file_id}.csv')
     print(raw_df.head())
     samples_input, sd_output = _get_data_from_df(raw_df)
     df = pd.DataFrame(
