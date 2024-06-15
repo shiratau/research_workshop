@@ -65,8 +65,9 @@ def test_predict_multi_dataset77():
 
 
 def test_predict_sd_normal():
-    file_id = "multi_dataset7"
-    raw_df = pd.read_csv(f'./../multi/datasets/{file_id}.csv')
+    file_id = "feature_dataset4"
+    # raw_df = pd.read_csv(f'./../multi/datasets/{file_id}.csv')
+    raw_df = pd.read_csv(f'./../feature/datasets/{file_id}.csv')
     print(raw_df.head())
     samples_input, sd_output = _get_data_from_df(raw_df)
     df = pd.DataFrame(
@@ -80,7 +81,7 @@ def test_predict_sd_normal():
     print(predictions)
     print(y_test)
 
-    df = pd.DataFrame(columns=['expected', 'prediction', 'compare'])
+    df = pd.DataFrame(columns=['expected', 'prediction', 'compare', 'binary'])
 
     suc = 0
     for i in range(len(predictions)):
@@ -94,7 +95,7 @@ def test_predict_sd_normal():
             if cmp:
                 suc += 1
 
-            df.loc[len(df.index)] = [exp, prd, cmp]
+            df.loc[len(df.index)] = [exp, prd, cmp, int(cmp)]
 
     print(f"num of success: {suc}")
     print(f"num of fails: {len(predictions)*3 - suc}")
@@ -133,7 +134,7 @@ def _compare_result_in_allowed_range(prediction, y_test_value) -> bool:
 
 
 def _export_result(df, file_id):
-    path = "./results/{}.csv"
+    path = "./results/multi/result_multi_{}.csv"
 
     if not os.path.exists(path.format(file_id)):
         df.to_csv(path.format(file_id))

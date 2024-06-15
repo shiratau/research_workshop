@@ -51,6 +51,7 @@ def _build_model_v2():
         tf.keras.layers.LSTM(64, return_sequences=True, input_shape=(None, 1)),
         tf.keras.layers.LSTM(32, return_sequences=False),
         tf.keras.layers.Dense(32, activation='relu'),
+        # tf.keras.layers.Discretization(num_bins=5, epsilon=0.01),
         tf.keras.layers.Dense(3, activation='linear')  # Output layer for predicting 3 sigma values
     ])
     model.compile(loss="mse", optimizer="adam")
