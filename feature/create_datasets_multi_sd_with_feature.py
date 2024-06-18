@@ -3,7 +3,7 @@ from random import randrange, uniform, randint
 
 from lib import *
 
-FILE_ID = 'feature_dataset5'
+FILE_ID = 'feature_dataset6'
 FILE_PATH_TEMPLATE = "./datasets/{}.csv"
 NUMBER_OF_AGENTS = 100
 NUMBER_OF_DIST_PER_AGENT = 3
@@ -26,7 +26,7 @@ def run_script():
             curr_mu = mu_pool[dist_num]
             curr_sd = sd_pool[dist_num]
             curr_sample = _pos_normal(curr_mu, curr_sd, sample_size)
-            curr_timestamps = _create_timestamps_seq(len(curr_sample))
+            curr_timestamps = _create_timestamps_seq(len(curr_sample), dist_num)
             row = [agent_id, sample_size, curr_sample, curr_timestamps, curr_mu, curr_sd]
             df.loc[len(df.index)] = row
         # print(f"done Agent {agent_id}")
@@ -35,9 +35,9 @@ def run_script():
     _write_metadata()
 
 
-def _create_timestamps_seq(size):
-    start_time = datetime(2024, 1, 1, 12, 0, 0).timestamp()
-    end_time = datetime(2024, 1, 1, 12, 0, 15).timestamp()
+def _create_timestamps_seq(size, dist_num):
+    start_time = datetime(2024, 1, 1, 12, 0, 15*dist_num).timestamp()
+    end_time = datetime(2024, 1, 1, 12, 0, 15*(dist_num + 1)).timestamp()
     timestamp_seq = [datetime.fromtimestamp(np.random.uniform(start_time, end_time)).timestamp() for _ in range(size)]
     timestamp_seq.sort()
     return timestamp_seq

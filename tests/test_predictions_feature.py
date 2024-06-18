@@ -43,7 +43,7 @@ def test_predict_multi_numbers_from_seq():
 
 
 def test_feature():
-    file_id = "feature_dataset5"
+    file_id = "feature_dataset6"
     raw_df = pd.read_csv(f'./../feature/datasets/{file_id}.csv')
     samples_input, timestamps_input, sd_output = _get_data_from_df(raw_df)
     df = pd.DataFrame(
