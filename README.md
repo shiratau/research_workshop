@@ -1,4 +1,4 @@
-# Research Workshop: RTV Change
+# Research Workshop: RTV Change model
 
 - [Project overview](#project-overview)
 - [Installation](#installation)
@@ -33,7 +33,7 @@ This model is a 3D model so it supports adding features to data and in this case
 ### Prerequisites
 
 - Python 3.11
-- [Virtualenv](https://virtualenv.pypa.io/en/stable/installation/)
+- [Virtualenv](https://virtualenv.pypa.io/en/latest/installation.html)
 
 ### Setup
 
@@ -186,7 +186,7 @@ Your Name - [shiraevron@mail.tau.ac.il](mailto:shiraevron@mail.tau.ac.il)
 
 Project Link: [https://github.com/shiratau/research_workshop](https://github.com/shiratau/research_workshop)
 
-## Thanks
+## Thanks - todo
 
 
 - [Person 1](link-to-person-1-profile): Description of their contribution.
