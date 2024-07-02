@@ -4,8 +4,8 @@ from lib import *
 from multi import predict_multi_sd
 from .utils import compare_result_in_allowed_range, export_result, parse_result_for_multi_sd_dataset, set_and_get_wd
 
-TEST_FILE_ID = "feature_dataset5"
-FOLDER = "feature"  # can be "multi"/"feature""
+TEST_FILE_ID = "multi_dataset1005"
+FOLDER = "multi"  # can be "multi"/"feature""
 # the multi sd model can work with datasets created by feature scripts as well, it ignores the timestamps.
 
 
