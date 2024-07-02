@@ -2,13 +2,12 @@ import ast
 
 from lib import *
 from feature import predict_featured_sd
+from .utils import compare_result_in_allowed_range, export_result, parse_result_for_multi_sd_dataset, set_and_get_wd
 
-DEVIATION_PERCENTAGE = 20
-UP_LIMIT = (100 + DEVIATION_PERCENTAGE) / 100
-DOWN_LIMIT = (100 - DEVIATION_PERCENTAGE) / 100
+TEST_FILE_ID = "feature_dataset5"
 
 
-def test_predict_multi_numbers_from_seq():
+def test_predict_multi_numbers_with_timestamp_from_seq():
     df = pd.DataFrame(
         {
             "input_samples": pd.Series([
@@ -38,13 +37,16 @@ def test_predict_multi_numbers_from_seq():
     for i in range(len(predictions.flat)):
         prd = predictions.flat[i]
         exp = y_test.flat[i]
-        cmp = _compare_result_in_allowed_range(prd, exp)
+        cmp = compare_result_in_allowed_range(prd, exp)
         print(f'prediction: {prd}, expected: {exp}, comparison: {cmp}')
 
 
-def test_feature():
-    file_id = "feature_dataset6"
-    raw_df = pd.read_csv(f'./../feature/datasets/{file_id}.csv')
+def test_predict_from_dataset():
+    this_dir = set_and_get_wd()
+    raw_df = pd.read_csv(os.path.join(this_dir, f'..\\feature\\datasets', f'{TEST_FILE_ID}.csv'))
+    print(raw_df.head())
+
+    # preparing data for model:
     samples_input, timestamps_input, sd_output = _get_data_from_df(raw_df)
     df = pd.DataFrame(
         {
@@ -54,30 +56,12 @@ def test_feature():
         }
     )
 
+    # run model and get predictions and expected values:
     predictions, y_test = predict_featured_sd.run(df)
+    print(f"RAW PREDICTIONS:\n{predictions}\n\nRAW EXPECTED:{y_test}\n")
 
-    print(predictions)
-    print(y_test)
-
-    df = pd.DataFrame(columns=['expected', 'prediction', 'compare', 'binary'])
-
-    suc = 0
-    for i in range(len(predictions)):
-        sd_prd_set = predictions[i]
-        sd_exp_set = y_test[i]
-        for j in range(len(sd_prd_set)):
-            prd = sd_prd_set[j]
-            exp = sd_exp_set[j]
-            cmp = _compare_result_in_allowed_range(prd, exp)
-            print(f'set: {i}, prediction: {prd}, expected: {exp}, comparison: {cmp}')
-            if cmp:
-                suc += 1
-
-            df.loc[len(df.index)] = [exp, prd, cmp, int(cmp)]
-
-    print(f"num of success: {suc}")
-    print(f"num of fails: {len(predictions)*3 - suc}")
-    _export_result(df, file_id)
+    result_df = parse_result_for_multi_sd_dataset(predictions, y_test)
+    export_result(result_df, "feature", TEST_FILE_ID)
 
 
 def _get_data_from_df(raw_df):
@@ -113,16 +97,3 @@ def _get_data_from_df(raw_df):
     print(timestamps_input)
     print(sd_output)
     return samples_input, timestamps_input, sd_output
-
-
-def _compare_result_in_allowed_range(prediction, y_test_value) -> bool:
-    return y_test_value * DOWN_LIMIT <= prediction <= y_test_value * UP_LIMIT
-
-
-def _export_result(df, file_id):
-    path = "./results/feature/result2_{}.csv"
-
-    if not os.path.exists(path.format(file_id)):
-        df.to_csv(path.format(file_id))
-    else:
-        df.to_csv(path.format(f'{file_id}_new'))
