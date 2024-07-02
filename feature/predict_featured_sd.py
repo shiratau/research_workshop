@@ -48,7 +48,7 @@ def _build_model():
     model.build(input_shape=[(None, None, 1), (None, None, 1)])  # Specify the input shape
     model.summary()
 
-    # _shape_visualization(model) # doesn't work here
+    # _shape_visualization(model)  # doesn't work well
 
     return model
 
@@ -60,7 +60,7 @@ def _train(model, train_dataset, test_dataset):
     print(his.keys())
     plt.plot(his["loss"], label="loss")
     plt.legend(loc="upper right")
-    plt.savefig('loss.png', bbox_inches='tight')
+    plt.savefig('feature_loss.png', bbox_inches='tight')
 
 
 def _predict(model, test_dataset):
@@ -69,7 +69,7 @@ def _predict(model, test_dataset):
 
 
 def _shape_visualization(model):
-    tf.keras.utils.plot_model(model, to_file='model_shape.png', show_shapes=True)
+    tf.keras.utils.plot_model(model, to_file='feature_model_shape.png', show_shapes=True)
 
 
 class CombinedLSTMModel(tf.keras.Model):
