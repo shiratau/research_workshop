@@ -1,6 +1,5 @@
-# Project name
+# Research Workshop: RTV Change
 
-## Table of Contents
 - [Project overview](#project-overview)
 - [Installation](#installation)
 - [Usage](#usage)
