@@ -6,6 +6,7 @@
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Contact](#contact)
+- [Thanks](#Thanks)
 
 ## Project overview
 This repo contains three standalons RNN models that aim to learn and predict different problems, but use the same infrastructure and logic.
@@ -22,7 +23,7 @@ Also, each model was desing after taking in considartion of previous model perfo
 * The model is designed to improve the performance of the multi model which failed to solve the problem satisfactorily, in that in addition to the data described above that the multi model receives, this model also receives for each reaction time a timestamp that represents the time when the subject reacted (this is different from the reaction time itself).
 This model is a 3D model so it supports adding features to data and in this case the feature we added is a timestamp.
 
-> To understand more about how this project was developed, and the problem it tried to solve, checkout project_explanation.pptx
+> **Note**: To understand more about how this project was developed, and the problem it tried to solve, checkout project_explanation.pptx
 
 
 ## Installation
@@ -182,3 +183,12 @@ Contributions are welcome! Please follow these steps to contribute:
 Your Name - [shiraevron@mail.tau.ac.il](mailto:shiraevron@mail.tau.ac.il)
 
 Project Link: [https://github.com/shiratau/research_workshop](https://github.com/shiratau/research_workshop)
+
+## Thanks
+
+
+- [Person 1](link-to-person-1-profile): Description of their contribution.
+- [Person 2](link-to-person-2-profile): Description of their contribution.
+- [Person 3](link-to-person-3-profile): Description of their contribution.
+
+
