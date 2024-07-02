@@ -1,7 +1,7 @@
 # Project name
 
 ## Table of Contents
-- [Project overview](#Project overview)
+- [Project overview](#project-overview)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -23,7 +23,7 @@ Also, each model was desing after taking in considartion of previous model perfo
 * The model is designed to improve the performance of the multi model which failed to solve the problem satisfactorily, in that in addition to the data described above that the multi model receives, this model also receives for each reaction time a timestamp that represents the time when the subject reacted (this is different from the reaction time itself).
 This model is a 3D model so it supports adding features to data and in this case the feature we added is a timestamp.
 
-> **Note**: To understand more about how this project was developed, and the problem it tried to solve, checkout project_explanation.pptx
+> **Note**: To understand more about how this project was developed, and the problem it tried to solve, checkout [presentation.pptx](todo)
 
 
 ## Installation
