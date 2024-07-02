@@ -3,13 +3,16 @@
 - [Project overview](#project-overview)
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Dataset Creation](#dataset-creation)
+  - [Running Tests](#running-tests)
+  - [Test Results](#test-results)
 - [Contributing](#contributing)
 - [Contact](#contact)
 - [Thanks](#Thanks)
 
 ## Project overview
 This repo contains three standalons RNN models that aim to learn and predict different problems, but use the same infrastructure and logic.
-The models development order were *single* -> *multi* -> *feature*, since each model helped in understand the more advanced problem we tried to solve. 
+The models development order were `single -> multi -> feature`, since each model helped in understand the more advanced problem we tried to solve. 
 Also, each model was desing after taking in considartion of previous model performance and prediction result.
 
  **Single** 
