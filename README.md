@@ -59,10 +59,10 @@ This model is a 3D model so it supports adding features to data and in this case
 
 1. Open PyCharm and select "Get from VCS".
 
-2. Enter the URL of your repository: `https://github.com/yourusername/your-repo-name.git` and click "Clone".
+2. Enter the URL of your repository: `https://github.com/shiratau/research_workshop.git` and click "Clone".
 
 3. Once the project is opened, PyCharm may prompt you to create a virtual environment. If not, you can set it up manually:
-   - Go to `File -> Settings -> Project: your-repo-name -> Python Interpreter`.
+   - Go to `File -> Settings -> Project: research_workshop -> Python Interpreter`.
    - Click on the gear icon and select `Add...`.
    - Choose `New environment` using Virtualenv and ensure the base interpreter is set to Python 3.x.
    - Click `OK`.
@@ -140,7 +140,7 @@ Each sub-project has a representative test file located under the `tests` direct
 #### PyCharm
 
 1. Ensure the virtual environment is selected as the Python interpreter:
-   - Go to `File -> Settings -> Project: your-repo-name -> Python Interpreter` and make sure the virtual environment is selected.
+   - Go to `File -> Settings -> Project: research_workshop-> Python Interpreter` and make sure the virtual environment is selected.
 
 2. Open the test file for the desired sub-project in the editor:
    - `tests/test_single.py`
