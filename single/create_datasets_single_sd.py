@@ -1,8 +1,5 @@
-from random import randrange, uniform
-
 from lib import *
 
-FILE_ID = 'single_dataset'
 NUMBER_OF_AGENTS = 1
 MAX_SAMPLES_PER_AGENT = 100
 MIN_SAMPLES_PER_AGENT = 50
@@ -14,7 +11,10 @@ SIGMA_RANGE = (0.1, 1.0)
 sd_pool = []
 
 
-def run_script():
+def run_script(file_id='single_dataset'):
+    file_id = f'{file_id}_{int(datetime.now().timestamp())}'
+    print(f'file id: {file_id}')
+
     df = pd.DataFrame(columns=['Agent', 'sample_id', 'sample_size', 'sample', 'mu', 'sd'])
 
     for agent_id in range(NUMBER_OF_AGENTS):
@@ -24,12 +24,13 @@ def run_script():
             curr_mu = uniform(MU_RANGE[0], MU_RANGE[1])
             curr_sd = _get_sd()
             curr_sample = np.random.normal(curr_mu, curr_sd, sample_size).tolist()
-            # _save_sample_in_histogram(curr_sample, curr_sd, curr_mu)
+            # save_sample_in_histogram(curr_sample, curr_sd, curr_mu)  # add import from lib.utils
             row = [agent_id, sample_id, sample_size, curr_sample, curr_mu, curr_sd]
             df.loc[(agent_id+1)*(sample_id+1)] = row
 
-    df.to_csv(f'{FILE_ID}.csv')
-    _write_metadata()
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    df.to_csv(f'./datasets/{file_id}.csv')
+    _write_metadata(file_id)
 
 
 def _get_sd():
@@ -40,17 +41,9 @@ def _get_sd():
     return sd_pool[randrange(0, 2)]
 
 
-def _save_sample_in_histogram(sample, sigma, mu):
-    count, bins, ignored = plt.hist(sample, 30, density=True)
-    plt.plot(bins, 1 / (sigma * np.sqrt(2 * np.pi)) *
-             np.exp(- (bins - mu) ** 2 / (2 * sigma ** 2)),
-             linewidth=2, color='r')
-    plt.savefig(f'figs/his({mu},{sigma}.png', bbox_inches='tight')
-
-
-def _write_metadata():
+def _write_metadata(file_id):
     metadata = [
-        f'FILE_ID: {FILE_ID}',
+        f'FILE_ID: {file_id}',
         f'NUMBER_OF_AGENTS: {NUMBER_OF_AGENTS}',
         f'MAX_SAMPLES_PER_AGENT: {MAX_SAMPLES_PER_AGENT}',
         f'MIN_SAMPLES_PER_AGENT: {MIN_SAMPLES_PER_AGENT}',
@@ -59,12 +52,15 @@ def _write_metadata():
         f'MU_RANGE: {MU_RANGE}',
         f'SIGMA_RANGE: {SIGMA_RANGE}',
     ]
-    with open(f'{FILE_ID}.txt', 'w') as f:
+    with open(f'./datasets/metadata/{file_id}.txt', 'w') as f:
         for line in metadata:
             f.write(line)
             f.write('\n')
 
 
 if __name__ == '__main__':
-    run_script()
+    if len(sys.argv) > 1:
+        run_script(file_id=sys.argv[1])
+    else:
+        run_script()
     print("done.")

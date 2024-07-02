@@ -22,7 +22,6 @@ def _split_sets_for_run(df):
     print(x_train.bounding_shape())
     print(x_train[0].shape)
     print(x_train[1].shape)
-    # print(x_train[2].shape)
 
     y_train = np.asarray(train_set["output"]).astype(np.float32)
     y_test = np.asarray(test_set["output"]).astype(np.float32)
@@ -56,5 +55,4 @@ def _train(model, x_train, y_train):
 
 def _predict(model, x_test):
     prediction = model.predict(x_test)
-    # print(prediction)
     return prediction
