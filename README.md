@@ -22,7 +22,7 @@ This model is a 3D model so it supports adding features to data and in this case
 
 ### Prerequisites
 
-- Python 3.x
+- Python 3.11
 - [Virtualenv](https://virtualenv.pypa.io/en/stable/installation/)
 
 ### Setup
@@ -31,8 +31,8 @@ This model is a 3D model so it supports adding features to data and in this case
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/shiratau/research_workshop.git
+   cd research_workshop
    ```
 
 2. Create a virtual environment:
@@ -85,15 +85,15 @@ The project is divided into three sub-projects: `single`, `multi`, and `feature`
 2. Run the dataset creation script for the desired sub-project:
    - For `single`:
      ```bash
-     python -m single.create_dataset [dataset_name]
+     python -m single.create_datasets_single_sd [dataset_name]
      ```
    - For `multi`:
      ```bash
-     python -m multi.create_dataset [dataset_name]
+     python -m multi.create_datasets_multi_sd [dataset_name]
      ```
    - For `feature`:
      ```bash
-     python -m feature.create_dataset [dataset_name]
+     python -m feature.create_datasets_with_feature [dataset_name]
      ```
 
    The `dataset_name` argument is optional.
@@ -101,15 +101,17 @@ The project is divided into three sub-projects: `single`, `multi`, and `feature`
 #### PyCharm
 
 1. Ensure the virtual environment is selected as the Python interpreter:
-   - Go to `File -> Settings -> Project: your-repo-name -> Python Interpreter` and make sure the virtual environment is selected.
+   - Go to `File -> Settings -> Project: research_workshop -> Python Interpreter` and make sure the virtual environment is selected.
 
 2. Open the dataset creation script for the desired sub-project in the editor:
-   - `single/create_dataset.py`
-   - `multi/create_dataset.py`
-   - `feature/create_dataset.py`
+   - `single/create_datasets_single_sd.py`
+   - `multi/create_datasets_multi_sd.py`
+   - `feature/create_datasets_with_feature.py`
 
-3. Click on the green arrow next to the script's main function to run it.
-
+3. Click on the green arrow next to this line in the file:
+    ```python
+    if __name__ == '__main__':
+    ```
 ### Running Tests
 
 Each sub-project has a representative test file located under the `tests` directory. The tests verify that the model of the sub-project can run on the created dataset.
@@ -124,15 +126,15 @@ Each sub-project has a representative test file located under the `tests` direct
 2. Run the test for the desired sub-project using `pytest`:
    - For `single`:
      ```bash
-     pytest tests/test_single.py::TestSingle::test_predict_from_dataset
+     pytest .\tests\test_predictions_single.py::test_predict_from_dataset
      ```
    - For `multi`:
      ```bash
-     pytest tests/test_multi.py::TestMulti::test_predict_from_dataset
+     pytest .\tests\test_predictions_multi.py::test_predict_from_dataset
      ```
    - For `feature`:
      ```bash
-     pytest tests/test_feature.py::TestFeature::test_predict_from_dataset
+     pytest .\tests\test_predictions_feature.py::test_predict_from_dataset
      ```
 
 #### PyCharm
@@ -146,3 +148,13 @@ Each sub-project has a representative test file located under the `tests` direct
    - `tests/test_feature.py`
 
 3. Click on the green arrow next to the `test_predict_from_dataset` method to run the test.
+
+### Test Results
+
+Test results will be saved in CSV files under the `tests/results/` directory:
+
+- For `single` sub-project: `tests/results/single/<dataset_name>_<timestamp>.csv`
+- For `multi` sub-project: `tests/results/multi/<dataset_name>_<timestamp>.csv`
+- For `feature` sub-project: `tests/results/feature/<dataset_name>_<timestamp>.csv`
+
+Make sure to check the respective directory for the results of your tests.
