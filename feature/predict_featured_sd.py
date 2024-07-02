@@ -60,7 +60,7 @@ def _train(model, train_dataset, test_dataset):
     print(his.keys())
     plt.plot(his["loss"], label="loss")
     plt.legend(loc="upper right")
-    plt.savefig('feature_loss.png', bbox_inches='tight')
+    plt.savefig('loss_feature.png', bbox_inches='tight')
 
 
 def _predict(model, test_dataset):
