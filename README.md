@@ -1,5 +1,12 @@
 # Project name
 
+## Table of Contents
+- [Project overview](#Project overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Contact](#contact)
+
 ## Project overview
 This repo contains three standalons RNN models that aim to learn and predict different problems, but use the same infrastructure and logic.
 The models development order were *single* -> *multi* -> *feature*, since each model helped in understand the more advanced problem we tried to solve. 
@@ -158,3 +165,20 @@ Test results will be saved in CSV files under the `tests/results/` directory:
 - For `feature` sub-project: `tests/results/feature/<dataset_name>_<timestamp>.csv`
 
 Make sure to check the respective directory for the results of your tests.
+
+## Contributing
+
+Contributions are welcome! Please follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b branch-name`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add these changes: <elaborate>'`).
+5. Push to the branch (`git push origin branch-name`).
+6. Open a pull request.
+
+## Contact
+
+Your Name - [shiraevron@mail.tau.ac.il](mailto:shiraevron@mail.tau.ac.il)
+
+Project Link: [https://github.com/shiratau/research_workshop](https://github.com/shiratau/research_workshop)
