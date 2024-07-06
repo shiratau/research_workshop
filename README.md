@@ -163,16 +163,17 @@ Dataset will be saved as CSV file under `[sub-project_name]/datasets/`, and a me
 2. Run the test for the desired sub-project using `pytest`:
    - For `single`:
      ```bash
-     pytest .\tests\test_predictions_single.py::test_predict_from_dataset
+     pytest .\tests\test_predictions_single.py::test_predict_from_dataset --file_id [dataset_file_id]
      ```
    - For `multi`:
      ```bash
-     pytest .\tests\test_predictions_multi.py::test_predict_from_dataset
+     pytest .\tests\test_predictions_multi.py::test_predict_from_dataset --file_id [dataset_file_id]
      ```
    - For `feature`:
      ```bash
-     pytest .\tests\test_predictions_feature.py::test_predict_from_dataset
+     pytest .\tests\test_predictions_feature.py::test_predict_from_dataset --file_id [dataset_file_id]
      ```
+The `--file_id` flag is optional, running test without it will run the test on the default dataset file configured in the file test: `DEFAULT_TEST_FILE_ID = [default_dataset]`.
 
 #### PyCharm
 
@@ -185,6 +186,8 @@ Dataset will be saved as CSV file under `[sub-project_name]/datasets/`, and a me
    - `tests/test_predictions_feature.py`
 
 3. Click on the green arrow next to the `test_predict_from_dataset` method to run the test.
+
+**Note**: this will run the test on the dafault dataset file, to run on different dataset, change the `DEFAULT_TEST_FILE_ID` value.
 
 ### Test Results
 

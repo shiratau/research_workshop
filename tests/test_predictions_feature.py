@@ -1,10 +1,8 @@
-import ast
-
 from lib import *
 from feature import predict_featured_sd
 from .utils import compare_result_in_allowed_range, export_result, parse_result_for_multi_sd_dataset, set_and_get_wd
 
-TEST_FILE_ID = "feature_dataset5"
+DEFAULT_TEST_FILE_ID = "feature_dataset5"
 
 
 def test_predict_multi_numbers_with_timestamp_from_seq():
@@ -41,9 +39,10 @@ def test_predict_multi_numbers_with_timestamp_from_seq():
         print(f'prediction: {prd}, expected: {exp}, comparison: {cmp}')
 
 
-def test_predict_from_dataset():
+def test_predict_from_dataset(file_id):
+    file_id = file_id if file_id else DEFAULT_TEST_FILE_ID
     this_dir = set_and_get_wd()
-    raw_df = pd.read_csv(os.path.join(this_dir, f'..\\feature\\datasets', f'{TEST_FILE_ID}.csv'))
+    raw_df = pd.read_csv(os.path.join(this_dir, f'..\\feature\\datasets', f'{file_id}.csv'))
     print(raw_df.head())
 
     # preparing data for model:
@@ -61,7 +60,7 @@ def test_predict_from_dataset():
     print(f"RAW PREDICTIONS:\n{predictions}\n\nRAW EXPECTED:{y_test}\n")
 
     result_df = parse_result_for_multi_sd_dataset(predictions, y_test)
-    export_result(result_df, "feature", TEST_FILE_ID)
+    export_result(result_df, "feature", file_id)
 
 
 def _get_data_from_df(raw_df):
