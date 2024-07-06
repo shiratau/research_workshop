@@ -219,7 +219,7 @@ Project Link: [https://github.com/shiratau/research_workshop](https://github.com
 ## Thanks
 
 
-- [Dr. Nitzan Shahar](link-to-person-1-profile): The PI of the [Shahar Lab](https://www.shahar-lab.com/), for hosting this workshop project.
+- [Dr. Nitzan Shahar](https://github.com/NitzanShahar): The PI of the [Shahar Lab](https://www.shahar-lab.com/), for hosting this workshop project.
 - [Gili Katabi](https://github.com/gilikatabi): PhD. Student, mentored this project.
 - Eliah Golan: Co-workshop-researcher, conducted the literature review for this project and co-presented it at a lab meeting.
 
