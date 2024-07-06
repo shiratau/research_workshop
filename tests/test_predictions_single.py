@@ -1,10 +1,8 @@
-import ast
-
 from lib import *
 from single import predict_single_sd
 from .utils import compare_result_in_allowed_range, export_result, set_and_get_wd
 
-TEST_FILE_ID = "single_dataset"
+DEFAULT_TEST_FILE_ID = "single_dataset"
 
 
 def test_predict_number_from_seq():
@@ -25,9 +23,10 @@ def test_predict_number_from_seq():
     compare_result_in_allowed_range(predictions.flat[0], y_test.flat[0])
 
 
-def test_predict_from_dataset():
+def test_predict_from_dataset(file_id):
+    file_id = file_id if file_id else DEFAULT_TEST_FILE_ID
     this_dir = set_and_get_wd()
-    raw_df = pd.read_csv(os.path.join(this_dir, "..\\single\\datasets", f'{TEST_FILE_ID}.csv'))
+    raw_df = pd.read_csv(os.path.join(this_dir, "..\\single\\datasets", f'{file_id}.csv'))
     print(raw_df.head())
 
     # preparing data for model:
@@ -59,4 +58,4 @@ def test_predict_from_dataset():
     print(f"num of success: {suc}")
     print(f"num of fails: {len(predictions) - suc}")
 
-    export_result(result_df, "single", TEST_FILE_ID)
+    export_result(result_df, "single", file_id)
