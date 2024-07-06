@@ -12,8 +12,8 @@
 
 ## Project overview
 This repo contains three standalons RNN models that aim to learn and predict different problems, but use the same infrastructure and logic.
-The models development order were `single -> multi -> feature`, since each model helped in understand the more advanced problem we tried to solve. 
-Also, each model was desing after taking in considartion of previous model performance and prediction result.
+The models development order was `single -> multi -> feature`, since each model helped in understand the more advanced problem we tried to solve by each model. 
+Also, each model was design after taking in consideration previous model performance and prediction result.
 
  **Single** 
 * The model is designed to predict σ (sd) from a sample taken from a normal distribution representing the subject's reaction times in an experiment.
@@ -22,10 +22,13 @@ Also, each model was desing after taking in considartion of previous model perfo
 * The model is designed to predict 3 σ (sd) of 3 different normal distributions (each representing reaction times of the same subject in the same experiment in chronological sequence under the assumption that they are different) from a series of numbers that are essentially a chain of the three samples corresponding to each distribution out of the three.
 
 **Feature**
-* The model is designed to improve the performance of the multi model which failed to solve the problem satisfactorily, in that in addition to the data described above that the multi model receives, this model also receives for each reaction time a timestamp that represents the time when the subject reacted (this is different from the reaction time itself).
-This model is a 3D model so it supports adding features to data and in this case the feature we added is a timestamp.
+* The model is designed to improve the performance of the *multi* model which currently failed to solve the problem satisfactorily. 
+* In addition to the data described above that the *multi* model receives. This model also receives for each reaction time a timestamp that represents the time when the subject reacted (this is different from the reaction time itself).
+* This model is a 3D model, so it supports adding features to data, and in this case the feature we added is a timestamp.
 
-> **Note**: To understand more about how this project was developed, and the problem it tried to solve, checkout [presentation.pptx](todo)
+> **Note 1**: The correct distribution form to represent RT of a subject in an experiment is ex-gaussian distribution. We choose to start with this simplification of the problem in order to focus on model development, ideally this project will continue to grow with a model able to predict τ (tau) of ex-gaussian distribution.
+
+> **Note 2**: To understand more about how this project was developed, and the problem it tried to solve, checkout [presentation.pptx](todo)
 
 
 ## Installation
