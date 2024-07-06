@@ -2,6 +2,8 @@
 
 - [Project overview](#project-overview)
 - [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
 - [Usage](#usage)
   - [Dataset Creation](#dataset-creation)
   - [Running Tests](#running-tests)
@@ -12,8 +14,8 @@
 
 ## Project overview
 This repo contains three standalons RNN models that aim to learn and predict different problems, but use the same infrastructure and logic.
-The models development order were `single -> multi -> feature`, since each model helped in understand the more advanced problem we tried to solve. 
-Also, each model was desing after taking in considartion of previous model performance and prediction result.
+The models development order was *single -> multi -> feature*, since each model helped in understand the more advanced problem we tried to solve by each model. 
+Also, each model was design after taking in consideration previous model performance and prediction result.
 
  **Single** 
 * The model is designed to predict σ (sd) from a sample taken from a normal distribution representing the subject's reaction times in an experiment.
@@ -22,10 +24,13 @@ Also, each model was desing after taking in considartion of previous model perfo
 * The model is designed to predict 3 σ (sd) of 3 different normal distributions (each representing reaction times of the same subject in the same experiment in chronological sequence under the assumption that they are different) from a series of numbers that are essentially a chain of the three samples corresponding to each distribution out of the three.
 
 **Feature**
-* The model is designed to improve the performance of the multi model which failed to solve the problem satisfactorily, in that in addition to the data described above that the multi model receives, this model also receives for each reaction time a timestamp that represents the time when the subject reacted (this is different from the reaction time itself).
-This model is a 3D model so it supports adding features to data and in this case the feature we added is a timestamp.
+* The model is designed to improve the performance of the *multi* model which currently failed to solve the problem satisfactorily. 
+* In addition to the data described above that the *multi* model receives. This model also receives for each reaction time a timestamp that represents the time when the subject reacted (this is different from the reaction time itself).
+* This model is a 3D model, so it supports adding features to data, and in this case the feature we added is a timestamp.
 
-> **Note**: To understand more about how this project was developed, and the problem it tried to solve, checkout [presentation.pptx](todo)
+> **Note 1**: The correct distribution form to represent RT of a subject in an experiment is ex-gaussian distribution. We choose to start with this simplification of the problem in order to focus on model development, ideally this project will continue to grow with a model able to predict τ (tau) of ex-gaussian distribution.
+
+> **Note 2**: To understand more about how this project was developed, and the problem it tried to solve, checkout [presentation.pptx](todo)
 
 
 ## Installation
@@ -122,9 +127,31 @@ The project is divided into three sub-projects: `single`, `multi`, and `feature`
     ```python
     if __name__ == '__main__':
     ```
+
+#### Configuration
+
+Each dataset can be configured before creation through the const in the relevant creation file, for example:
+
+```Python
+NUMBER_OF_AGENTS = 100
+NUMBER_OF_DIST_PER_AGENT = 3
+MAX_SIZE_OF_SAMPLE = 210
+MIN_SIZE_OF_SAMPLE = 190
+MU_RANGE = (20.1, 20.8)
+SIGMA_RANGE = (0.01, 0.1)
+SHOULD_ROUND = True
+N_DIGIT = 5
+```
+
+#### Output
+Dataset will be saved as CSV file under `[sub-project_name]/datasets/`, and a metadata file of the set configuration will be saved as TXT file under `[sub-project_name]/datasets/metadata/`.
+
+
 ### Running Tests
 
-Each sub-project has a representative test file located under the `tests` directory. The tests verify that the model of the sub-project can run on the created dataset.
+* Each sub-project has a representative test file located under the `tests` directory. 
+* The tests verify that the model of the sub-project can run on the created dataset.
+* Each sub-project also have basic sanity tests in it test file.
 
 #### Command Line
 
@@ -153,9 +180,9 @@ Each sub-project has a representative test file located under the `tests` direct
    - Go to `File -> Settings -> Project: research_workshop-> Python Interpreter` and make sure the virtual environment is selected.
 
 2. Open the test file for the desired sub-project in the editor:
-   - `tests/test_single.py`
-   - `tests/test_multi.py`
-   - `tests/test_feature.py`
+   - `tests/test_predictions_single.py`
+   - `tests/test_predictions_multi.py`
+   - `tests/test_predictions_feature.py`
 
 3. Click on the green arrow next to the `test_predict_from_dataset` method to run the test.
 
