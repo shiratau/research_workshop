@@ -10,7 +10,7 @@
   - [Test Results](#test-results)
 - [Contributing](#contributing)
 - [Contact](#contact)
-- [Thanks](#Thanks)
+- [Thanks](#thanks)
 
 ## Project overview
 This repo contains three standalons RNN models that aim to learn and predict different problems, but use the same infrastructure and logic.
@@ -216,11 +216,11 @@ Your Name - [shiraevron@mail.tau.ac.il](mailto:shiraevron@mail.tau.ac.il)
 
 Project Link: [https://github.com/shiratau/research_workshop](https://github.com/shiratau/research_workshop)
 
-## Thanks - todo
+## Thanks
 
 
-- [Person 1](link-to-person-1-profile): Description of their contribution.
-- [Person 2](link-to-person-2-profile): Description of their contribution.
-- [Person 3](link-to-person-3-profile): Description of their contribution.
+- [Dr. Nitzan Shahar](https://github.com/NitzanShahar): The PI of the [Shahar Lab](https://www.shahar-lab.com/), for hosting this workshop project.
+- [Gili Katabi](https://github.com/gilikatabi): PhD. Student, mentored this project.
+- Eliah Golan: Co-workshop-researcher, conducted the literature review for this project and co-presented it at a lab meeting.
 
 
