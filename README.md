@@ -2,6 +2,8 @@
 
 - [Project overview](#project-overview)
 - [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Setup](#setup)
 - [Usage](#usage)
   - [Dataset Creation](#dataset-creation)
   - [Running Tests](#running-tests)
@@ -12,7 +14,7 @@
 
 ## Project overview
 This repo contains three standalons RNN models that aim to learn and predict different problems, but use the same infrastructure and logic.
-The models development order was `single -> multi -> feature`, since each model helped in understand the more advanced problem we tried to solve by each model. 
+The models development order was *single -> multi -> feature*, since each model helped in understand the more advanced problem we tried to solve by each model. 
 Also, each model was design after taking in consideration previous model performance and prediction result.
 
  **Single** 
@@ -125,9 +127,31 @@ The project is divided into three sub-projects: `single`, `multi`, and `feature`
     ```python
     if __name__ == '__main__':
     ```
+
+#### Configuration
+
+Each dataset can be configured before creation through the const in the relevant creation file, for example:
+
+```Python
+NUMBER_OF_AGENTS = 100
+NUMBER_OF_DIST_PER_AGENT = 3
+MAX_SIZE_OF_SAMPLE = 210
+MIN_SIZE_OF_SAMPLE = 190
+MU_RANGE = (20.1, 20.8)
+SIGMA_RANGE = (0.01, 0.1)
+SHOULD_ROUND = True
+N_DIGIT = 5
+```
+
+#### Output
+Dataset will be saved as CSV file under `[sub-project_name]/datasets/`, and a metadata file of the set configuration will be saved as TXT file under `[sub-project_name]/datasets/metadata/`.
+
+
 ### Running Tests
 
-Each sub-project has a representative test file located under the `tests` directory. The tests verify that the model of the sub-project can run on the created dataset.
+* Each sub-project has a representative test file located under the `tests` directory. 
+* The tests verify that the model of the sub-project can run on the created dataset.
+* Each sub-project also have basic sanity tests in it test file.
 
 #### Command Line
 
@@ -156,9 +180,9 @@ Each sub-project has a representative test file located under the `tests` direct
    - Go to `File -> Settings -> Project: research_workshop-> Python Interpreter` and make sure the virtual environment is selected.
 
 2. Open the test file for the desired sub-project in the editor:
-   - `tests/test_single.py`
-   - `tests/test_multi.py`
-   - `tests/test_feature.py`
+   - `tests/test_predictions_single.py`
+   - `tests/test_predictions_multi.py`
+   - `tests/test_predictions_feature.py`
 
 3. Click on the green arrow next to the `test_predict_from_dataset` method to run the test.
 
