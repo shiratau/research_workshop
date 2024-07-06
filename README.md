@@ -212,7 +212,7 @@ Contributions are welcome! Please follow these steps to contribute:
 
 ## Contact
 
-Your Name - [shiraevron@mail.tau.ac.il](mailto:shiraevron@mail.tau.ac.il)
+E-mail: [shiraevron@mail.tau.ac.il](mailto:shiraevron@mail.tau.ac.il)
 
 Project Link: [https://github.com/shiratau/research_workshop](https://github.com/shiratau/research_workshop)
 
