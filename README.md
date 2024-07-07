@@ -30,7 +30,7 @@ Also, each model was design after taking in consideration previous model perform
 
 > **Note 1**: The correct distribution form to represent RT of a subject in an experiment is ex-gaussian distribution. We choose to start with this simplification of the problem in order to focus on model development, ideally this project will continue to grow with a model able to predict τ (tau) of ex-gaussian distribution.
 
-> **Note 2**: To understand more about how this project was developed, and the problem it tried to solve, checkout [presentation.pptx](todo)
+> **Note 2**: To understand more about how this project was developed, and the problem it tried to solve, checkout [presentation.pptx](https://github.com/shiratau/research_workshop/blob/master/presentation.pptx)
 
 
 ## Installation
